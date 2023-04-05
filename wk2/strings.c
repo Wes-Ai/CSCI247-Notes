@@ -73,7 +73,7 @@ int main() {
 // 0xfffffff0
 // 1111 1111 1111 1111 1111 1111 1111 0000
 
-// * * * SIGN MAGNITUDE * * *
+//      * * * SIGN MAGNITUDE * * *
 // Decimal - Binary    Decimal - Binary
 // 0 - 0000                 
 // 1 - 0001                 -1 - 1001
@@ -83,3 +83,41 @@ int main() {
 // 5 - 0101                 -5 - 1101
 // 6 - 0110                 -6 - 1110
 // 7 - 0111                 -7 - 1111
+
+
+
+// Unsigned numbers: smallest = 0, larget = 2^n - 1 (n == # bits)
+
+// Binary adding:
+// 3 + 5
+// 0 0 1 1
+//+0 1 0 1
+//________
+// 1 0 0 0
+
+// 15 + 1
+// 1 1 1 1
+//+0 0 0 1
+
+//1 0 0 0 0
+//^ Carry bit overflow
+
+//          * * * NEGATIVE NUMBERS * * *
+// First bit is negative, also known as the 'most significant bit'
+// Smallest: -(2^n-1 - 1)
+// Largest: 2^n-1 -1
+
+// 1) Two representations of 0.
+// 2) Different rules for positive and negative values
+// 3) Additions works normally with 'end-around carry'
+
+// 0101     5 - 3
+//+1100
+//10001
+//+0001
+//=0010     = 2
+
+// Ones complement - to get negative, invert all bits
+
+// Two's complement - To get negative: 1) Invert all bits, 2) Add 1.
+

@@ -1,0 +1,7 @@
+Segmentation fault;
+
+// Be careful of assigning pointer with no size
+char * s; -> picks 8 bytes in memory, assigns it
+
+// This is better
+char s[50];
