@@ -1,0 +1,68 @@
+Bit Twiddling:
+
+left shift  << (*2)
+right shift >> (/2)
+& bitwise AND   // Use with a mask to determine if bits are set
+                // Use to get the value of bits
+| bitwise OR    // Set a bit or bits
+
+10011001 == 0x99
+    > Is bit 4 1 or not?
+
+char mask = 0x08 == 00001000
+
+ 10011001   //bits
++00001000   // mask
+=00001000   // set?
+
+int a = _______     // Is bit 15 set?
+int mask = 1 << 14; // Shift 14 for 15th bit.
+
+
+if(a &mask != 0) {
+    set
+}
+else {
+    not set
+}
+
+a =    10011001,        char a = 0x99;
+mask = 00111000,        char mask = 0x38;
+a&msk= 00011000,        int val = (a &mask) >> 3;
+
+
+    a = 10011001        char a = 0x99; //Set 3rd bit
+ mask = 00000100        char mask = 0x04;
+ a|msk= 10011101        a = a | mask;    a |= mask;
+
+int a = _______
+int mask = 1 << 23  // Get 23rd bit?
+int |= mask;
+
+
+Bitwise Negation (~)
+
+a = 10011001
+~a= 01100110
+
+
+
+Fixed Point Representation:
+    In 8 bits:              _ _ _ _ . _ _ _ _
+                        2^3, 2^2, 2^1, 2^0, 1/2, 24, 1/8, 1/16
+                            0 1 0 1 . 0 1 0 0
+                                5   +   1/4 = 5.25
+
+Floating Point Representation
+    1.2345 * 10^-4 == 0.00012345
+
+    8 bits
+    1 bit = sign, 4 bits = exponent, 3 bits = significand
+    1 0010 010
+    - 2 * 2^2
+
+    8 bits (small values)
+    1 bit = sign, 4 bits = exponent - 7, 3 bits = significand
+    0 0010 1001
+    + 1 * 2^(2-7)
+    = 1 * 2^-5
