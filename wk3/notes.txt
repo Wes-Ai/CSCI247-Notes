@@ -66,3 +66,55 @@ Floating Point Representation
     0 0010 1001
     + 1 * 2^(2-7)
     = 1 * 2^-5
+
+    4/11/2023
+
+Normal #'s: Exponent is non-zero        Subnormal: Exponent is zero
+    Mantissa has a leading 1                Mantissa has no leading 1
+
+sign | exponenct-7 | mantissa
+    1 0010 101
+    - .101 * 2^(2-7)
+    (1 + 1/2 + 1/8) * 2^-5
+
+    1 0000 110
+    - 0.110 * 2^-7
+        ^(Base 2)
+    (1/2 + 1/4) * 2^-7
+
+Smallest positive 8 bit floating point number:
+    0 0000 001
+   =0.001 * 2^-7
+      ^(Base 2)
+
+IEEE 754
+Floats: 1 bit    8 bits                          23 bits
+        sign| Exponenet-127    |               Mantissa            |
+
+Doubles: 1 bit  11 bits                             52 bits
+         sign|  Exponent-1023    |                   Mantissa                    |
+
+    0 0000 000 == 0
+    1 0000 000 == -0
+
+    0 1111 111 == Largest positive number
+    + 1.111 * 2^8
+        ^(Base 2)
+
+
+    1 1111 111 == Infinity or Nan
+    - 1.111 * 2^8 (Not a number)
+        ^(Base 2)
+
+
+Granularity of FP numbers
+    0.1234
+    1.234
+    12.34
+    123.4
+    1234.0
+    12340.0
+    * Very fine near 0, but less accurate as it increases
+    * Z-fighting issues in games for far away objects
+
+Approximating Reality
