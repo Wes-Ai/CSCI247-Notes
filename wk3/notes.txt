@@ -117,4 +117,18 @@ Granularity of FP numbers
     * Very fine near 0, but less accurate as it increases
     * Z-fighting issues in games for far away objects
 
-Approximating Reality
+
+
+* * * * Semiconductors * * * *
+Conductor - Electricity passes thru
+Insulator - No Electricity
+Semi-Conductors - Sometimes passes electricity
+
+
+NOT, OR, AND gates
+truth table for: A*B + !A * !B
+A   B   A*B     !A*!B   Q=A*B + !A*!B
+0   0   0       1       1
+0   1   0       0       0
+1   0   0       0       0
+1   1   1       0       1
