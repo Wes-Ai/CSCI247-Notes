@@ -1,0 +1,30 @@
+What does a CPU do? (CPU loop)
+ -> 1. fetch an instruction
+ |  2. increment the program counter
+ |  3. execute instruction
+ -- 4. goto 1
+
+x86 Registers
+64 Bit:         32 Bit:             16 Bit:
+R0 - RAX        ROD - EAX           R0W - AX
+R1 - RCX        RID - ECX           R1W - CX
+R2 - RDX        R2D - EDX           R2W - DX
+R3 - RBX        R3D - EBX           ...
+R4 - RSP        R4D - ESP
+R5 - RBP        RSD - EBP
+R6 - RSI        R6D - ESI
+R7 - RDI        R7D - EDI
+R8              R8D
+R9              R9D
+R10             R10D
+R11             R11D
+R12             R12D
+R13             R13D
+R14             R14D
+R15             R15D
+
+A - Accumulator
+C - Counter
+S - Stack
+B - Base
+
