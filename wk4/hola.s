@@ -3,9 +3,9 @@
         .text
 
 main:
-        mov message, %rdi
+        mov $message, %rdi
         call puts
         ret
 
         .data
-message: .asciz "Hola Mundo\n"  # Asciz is null terminated C string
+message: .asciz "Hola Mundo"  # Asciz is null terminated C string

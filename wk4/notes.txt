@@ -28,3 +28,12 @@ C - Counter
 S - Stack
 B - Base
 
+CPU in-depth steps:
+
+1. IF - Instruction Fetch - Load PC into MAR, get value in MDR, move into IR
+2. ID - Instruction Decode - Set up ALU
+3. EX - Instruction execute - ALU does work
+4. MEM - Memory Read/Write
+5. WB - Write result to register (if any)
+
+* Each instruction takes one cycle to complete, (5 cycles per instruction CPI)
