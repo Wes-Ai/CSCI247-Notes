@@ -37,3 +37,31 @@ CPU in-depth steps:
 5. WB - Write result to register (if any)
 
 * Each instruction takes one cycle to complete, (5 cycles per instruction CPI)
+
+disp(base, index, scale)
+addr = disp + base + index * scale;
+
+mov %r1,%r2     // Move r1 into r2
+mov (%r1), %r2
+mov 8(%r1), %r2 
+mov 8(%r1, 3, 4), %r2 == ptr[3] -> top;
+ ^ addr = 8 + %r1 + 3 * 4
+
+ Complicated: mov 8(%r1, 3, 4), %r2
+  - Fewer instructions     & variable EX cycles (CISC) (x86)
+
+ Simple:    add $12, %r3
+            add $8, %or3
+            mov (%r3), %r2
+ - More instructions       & EX is always 1 cycle (RISC) (ARM)
+
+ Pipelining (Key ideas of modern CPUS)
+Clock Cycle     IF      ID      EX      MEM     WB
+ADD.1   |       ADD.1
+ADD.2   |       ADD.2   ADD.1
+MOV     |       MOV     ADD.2   ADD.1
+4.      |       ...     MOV     ADD.2   ADD.1
+5.      |       ...     ...     MOV     ADD.2   ADD.1
+6.      |       ...     ...     ...     MOV     ADD.2
+
+If pipeline is full, CPI = 1
