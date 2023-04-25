@@ -1,0 +1,23 @@
+Pipeline hazards:
+    1. Structural hazard - resource contention
+        Fix: Add more resources.
+    2. Data hazard - instructions dependency
+        Fix: Feedback
+    3. Branch hazard - If/else, loops, switch function calls, goto, return
+        Fix: ?
+    4. Memory hazard -  Memory is very slow
+        Fix: Cache  
+
+How to fix branch hazards
+    1. Ignore it, but branches are 15% to 25% of code
+    2. Predict where it will go
+        a. Random - flip a coin
+        b. Hints - Intel pentium 
+        c. Predict always taken         } Static
+           Predict always not taken     } Prediction
+        d. Forwards always not taken
+           Backwards always taken
+        e. Profile driven execution
+            Predict if taken last time, it will be taken again
+        h. Neural networks
+
