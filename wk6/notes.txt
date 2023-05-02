@@ -1,0 +1,26 @@
+Optimization:
+
+Loops happen the most
+    - Do something slow and its magnified n times
+    - Lots of branches
+
+// Unoptimized
+while (i < 1000) {
+    a = sin(x) / cos(x) + i;
+
+    i++;
+}
+
+// Optimized
+// "Code motion" - moved code out of the loop
+float temp = sin(x) / cos(x);
+while (i < 1000) {
+    a = temp + i;
+
+    i++;
+}
+
+// Unoptimized
+for (int i=0; i < 5; i++) {
+    printf("foo");
+}
