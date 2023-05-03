@@ -4,6 +4,18 @@ Loops happen the most
     - Do something slow and its magnified n times
     - Lots of branches
 
+Loop optimization:
+    1. Code motion      - Reduce stuff inside the loop
+    2. Loop unrolling   - Reduce branches
+    3. Loop jamming(fusion)- Reduce branches
+    4. Loop fission     - Improving locality (memory access is closer)
+    5. Loop interchange - Improving locality
+
+Cache
+Principle of locality
+    1. Space locality       - Likely to access things close together
+    2. Temporal locality - Frequently accessed things, will be accessed again
+
 // Unoptimized
 while (i < 1000) {
     a = sin(x) / cos(x) + i;
@@ -23,4 +35,75 @@ while (i < 1000) {
 // Unoptimized
 for (int i=0; i < 5; i++) {
     printf("foo");
+}
+
+// Unoptimized
+i = 0;
+while (i <= len(s) - 1) {
+    s[i] = ...
+}
+
+// Optimized
+i = 0;
+while (i < len(s)) {
+    s[i] = ...
+}
+
+// Unoptimized
+for (int i = 0; i < 5; i++) {
+    printf("foo");
+}
+
+// Optimized
+printf("foo");
+printf("foo");
+printf("foo");
+printf("foo");
+printf("foo");
+
+// Original
+for (int i = 0; i < 5; i++) {
+    a = i + 5;
+}
+for (int i = 0; i < 5; i++) {
+    b = i + 10;
+}
+
+// Optimized
+for (int i = 0; i < 5; i++) {
+    a = i + 5;
+    b = i + 10;
+}
+
+// Fission
+// Original
+int i, a[1000], b[1000];
+for (int i = 0; i < 1000; i++) {
+    a[i] = 1;
+    b[i] = 2;
+}
+
+// Optimized
+int i, a[1000], b[1000];
+for (int i = 0; i < 1000; i++) {
+    a[i] = 1;
+}
+for (int i = 0; i < 1000; i++) {
+    b[i] = 2;
+}
+
+// Original
+int a[1000][1000];
+for (int i = 0; i < 1000; i++) {
+    for (int j = 0; j < 1000; j++) {
+        a[j][i] = i+j;
+    }
+}
+
+// Optimized
+int a[1000][1000];
+for (int i = 0; i < 1000; i++) {
+    for (int j = 0; j < 1000; j++) {
+        a[i][j] = i+j;
+    }
 }
