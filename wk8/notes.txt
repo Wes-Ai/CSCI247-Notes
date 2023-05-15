@@ -1,0 +1,25 @@
+Virtual memory - paging
+
+0
+1
+2
+3 ||||      - Code x (execute)
+4 %%%%      - Data w
+5 %%%%             w
+6 mmm   _- Program break (part of memory beyond anything is mapped)
+7 mm<--/    (The break will continue growing)
+8  <--/
+9 .../
+10
+11
+12
+13
+14  SSS
+15  <-- SSS - Stack (grows ^)
+
+Only system call is to allocate pages - sbrk()
+Malloc() uses a linked list before the allocated memory to keep
+track of the free and used memory.
+    - Also coalesces neighboring free linked list nodes
+Complexity of malloc() is O(n)
+    - free() is O(1)
