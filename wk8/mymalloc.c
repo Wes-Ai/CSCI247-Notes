@@ -23,6 +23,25 @@ int space(node_t* node) {
     }
 }
 
+void coalesce(node_t* prev, node_t* next) {
+    if (prev == NULL || !prev->avail || !next->avail) {
+        return;
+    }
+    prev->next = next->next;
+    prev->next->prev = prev;
+}
+
+void alloc_more(node_t* last) {
+    void* ptr = sbrk(PAGE_SIZE);
+    node_t* end = (node_t*) (ptr + PAGE_SIZE - sizeof(node_t));
+    end->avail = false;
+    end->next = NULL;
+    end->prev = last;
+    last->next = end;
+    last->avail = true;
+    coalesce(last->prev, last);
+}
+
 void* mymalloc(int size) {
     if (HEAP_BASE = NULL) {
         HEAP_BASE = sbrk(PAGE_SIZE);    // Pointer to start of mem
@@ -43,15 +62,42 @@ void* mymalloc(int size) {
 
     // Walk down the linked list and find a slot that is free + fits
     node_t* node = (node_t*) HEAP_BASE;
-    while (node != NULL && space(node) < size) {
-        node = node->next;
+
+    for (;;) {
+        if (node->next == NULL) {   // Reached last node
+            alloc_more(node);
+            continue;
+        } else if (space(node) < size) {
+            node = node->next;
+            continue;
+        } else {    // Found a spot
+            break;
+        }
+    }
+    
+    // Device if we need to split the node
+    if (space(node) > size + sizeof(node_t)) {
+        node_t* mid = (node_t*) (((void*) node) +
+        sizeof(node_t) + size);
+        mid->avail = true;
+        mid->next = node->next;
+        mid->prev = node;
+        node->next = mid;
     }
 
-    // Check if you hit the end of the memory / nodes
-    if (node == NULL) {
-        // Must call sbrk again
-    } else {
-        // Found a slot...
-        node->avail = false;
-    }
+    node->avail = false;
+    return ((void*) node + sizeof(node_t));
+}
+
+
+void myfree(void* ptr) {
+    node_t* node = (node_t*) (ptr - sizeof(node_t));
+    node->avail = true;
+    coalesce(node, node->next);
+    coalesce(node->prev, node);
+}
+
+int main() {
+    void* p = mymalloc(10);
+    myfree(p);
 }
