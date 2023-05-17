@@ -23,3 +23,8 @@ track of the free and used memory.
     - Also coalesces neighboring free linked list nodes
 Complexity of malloc() is O(n)
     - free() is O(1)
+
+
+
+5/17/2023
+ELF - Executable Link Format
