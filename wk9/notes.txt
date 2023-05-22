@@ -1,0 +1,26 @@
+Boot sequence:
+1. BIOS is in memory at position 0
+2. BIOS assumes bootloader is at sector 0 of disk
+3. Loads bootloader
+4. Jumps into bootloader
+5. Bootloader loads the kernel as an ELF file
+6. Jumps into kernel
+7. Kernel sets up kernel page table
+
+System call:
+1. Syscall instruction
+    - Create trapframe
+        a. registers
+        b. return address
+    - Look at Interrupt Descriptor Table
+    - Execute IDT handler on kernel stack
+
+
+Interrupt Descriptor Table      // 256 entries
+Interrupt   |   Function
+--------------------------
+syscall     |   handle_sys()
+seg fault   |   handle_seg()
+page fault  |   handle_page()
+divide by 0
+keyboard
