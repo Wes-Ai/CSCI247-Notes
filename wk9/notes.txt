@@ -24,3 +24,21 @@ seg fault   |   handle_seg()
 page fault  |   handle_page()
 divide by 0
 keyboard
+
+_____________
+|   kernel  |   Top 16 bis of virtual address is 1
+|           |   (canonical)
+|-----------|
+|           |
+|           |
+|           |   non-canonical
+|   unused  |
+|           |
+|           |
+|-----------|
+|           |   (canonical)
+|    user   |   top 16 bits of the virtual address is 0
+-------------
+
+Syscall -> ... -> iret
+There is always atleast 1 user process
